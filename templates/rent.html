@@ -1,0 +1,134 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="rentform">
+  <div class="container-fluid rounded">
+    <!-- Rent form -->
+    <div class="row">
+      <div class="col-sm">
+          <h1>Rent this property</h1>
+          <form method="POST">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+              <legend class="border-bottom mb-4"></legend>
+              <div class="form-group">
+                {{ form.firstName.label(class="form-control-label") }}
+                {% if form.firstName.errors %}
+                       {{ form.firstName(class="form-control form-control-lg is-invalid") }}
+                       <div class="invalid-feedback">
+                           {% for error in form.firstName.errors %}
+                               <span>{{ error }}</span>
+                           {% endfor %}
+                       </div>
+                   {% else %}
+                       {{ form.firstName(class="form-control form-control-lg") }}
+                   {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.lastName.label(class="form-control-label") }}
+                {% if form.lastName.errors %}
+                       {{ form.lastName(class="form-control form-control-lg is-invalid") }}
+                       <div class="invalid-feedback">
+                           {% for error in form.lastName.errors %}
+                               <span>{{ error }}</span>
+                           {% endfor %}
+                       </div>
+                   {% else %}
+                       {{ form.lastName(class="form-control form-control-lg") }}
+                   {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                       {{ form.email(class="form-control form-control-lg is-invalid") }}
+                       <div class="invalid-feedback">
+                           {% for error in form.email.errors %}
+                               <span>{{ error }}</span>
+                           {% endfor %}
+                       </div>
+                   {% else %}
+                       {{ form.email(class="form-control form-control-lg") }}
+                   {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.startDate.label(class="form-control-label") }}
+                {% if form.startDate.errors %}
+                       {{ form.startDate(class="form-control form-control-lg is-invalid") }}
+                       <div class="invalid-feedback">
+                           {% for error in form.startDate.errors %}
+                               <span>{{ error }}</span>
+                           {% endfor %}
+                       </div>
+                   {% else %}
+                       {{ form.startDate(class="form-control form-control-lg") }}
+                   {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.endDate.label(class="form-control-label") }}
+                {% if form.endDate.errors %}
+                       {{ form.endDate(class="form-control form-control-lg is-invalid") }}
+                       <div class="invalid-feedback">
+                           {% for error in form.email.errors %}
+                               <span>{{ error }}</span>
+                           {% endfor %}
+                       </div>
+                   {% else %}
+                       {{ form.endDate(class="form-control form-control-lg") }}
+                   {% endif %}
+              </div>
+              <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info btn-block") }}
+              </div>
+            </fieldset>
+          </form>
+      </div>
+      <!-- Displays existing bookings table -->
+      <div class="col-sm">
+        <h1>Existing Bookings</h1>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Confirmed</th>
+            </tr>
+          </thead>
+          {% for item in bookingData %}
+          <tr>
+              <td>{{item[3]}}</td>
+              <td>{{item[4]}}</td>
+              <td>{{item[5]}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+  </div>
+  <!-- Displays Google Calendar of existing bookings -->
+  <div class="row">
+    <div class="col-sm">
+      <h1>Calendar of Existing Bookings</h1>
+      <hr>
+      <br>
+      <div id="google-calendar">
+      <iframe src="https://calendar.google.com/calendar/b/2/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=sandshousing2%40gmail.com&amp;color=%231B887A&amp;ctz=Europe%2FLondon"></iframe>
+      </div>
+    </div>
+    <!-- Live weather data -->
+    <div class="col-sm">
+      <h1>Current weather</h1>
+      <hr>
+      <br>
+      <h5>
+      Temperature: {{weatherData[0]}}
+      </h5>
+      <h5>
+      Wind speed: {{weatherData[1]}}mph
+      </h5>
+      <h5>
+      Forecast: {{weatherData[2]}}
+      </h5>
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

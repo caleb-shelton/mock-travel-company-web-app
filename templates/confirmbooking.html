@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="rentform">
+  <div class="container-fluid rounded">
+    <div class="row">
+      <div class="col-sm">
+          <h1>Confirm booking</h1>
+          <hr>
+          <br>
+          <h4>Firstname: {{ firstName }}</h4>
+          <h4>Lastname: {{ lastName }}</h4>
+          <h4>Email: {{ email }}</h4>
+          <h4>Start Date: {{ startDate }}</h4>
+          <h4>End Date: {{ endDate }}</h4>
+          <h4>Confirmed: {{ confirmed }}</h4>
+      </div>
+      <div class="col-sm">
+        <h1>Total cost of stay</h1>
+        <hr>
+        <br>
+        <h4>Nights Booked: {{ daysBooked }}</h4>
+        <h4>Cost Per Night: £{{ costPerNight }}</h4>
+        <hr>
+        <br>
+        <h4>Price Of Stay: £{{ priceOfStay }}</h4>
+        <a href="confirmed" class="btn btn-info">Confirm Booking</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

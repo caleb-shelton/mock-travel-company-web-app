@@ -1,0 +1,207 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="rentform">
+  <div class="container-fluid rounded">
+    <div class="row">
+      <div class="col-sm">
+      <h1>Admin panel</h1>
+      <hr>
+      <br>
+      <!-- Confirm bookings form -->
+      <form method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+          <div class="form-group">
+            {{ form.bookees.label(class="form-control-label") }}
+            {{ form.bookees(class="form-control form-control-lg") }}
+          </div>
+
+          <div class="form-group">
+            {{ form.confirm(class="btn btn-outline-info btn-block") }}
+          </div>
+        </fieldset>
+      </form>
+      </div>
+      <!-- Displays table of booking data -->
+      <div class="col-sm">
+        <h1>Bookings</h1>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Email</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Confirmed</th>
+            </tr>
+          </thead>
+          {% for item in bookingData %}
+          <tr>
+              <td>{{item[0]}}</td>
+              <td>{{item[1]}}</td>
+              <td>{{item[2]}}</td>
+              <td>{{item[3]}}</td>
+              <td>{{item[4]}}</td>
+              <td>{{item[5]}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+    <!-- Displays table of most valued customers -->
+    <div class="row">
+        <br>
+        <div class="col-sm">
+          <h1>Most valued customers</h1>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>Customer name</th>
+                <th>Number of bookings</th>
+                <th>Nights booked</th>
+              </tr>
+            </thead>
+            {% for item in mvCustomerList %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <!-- Displays useful data such as total revenue and average review score -->
+        <div class="col-sm">
+          <h1>Useful data</h1>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>Total Revenue</th>
+                <th>Average Review Score</th>
+              </tr>
+            </thead>
+            {% for item in mvCustomerList %}
+            <tr>
+                <td>£{{revenue}}</td>
+                <td>{{averageReview}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+
+    <!-- Displays Google Charts API graphs -->
+    <div class="row">
+      <div class="col-sm">
+        <script type="text/javascript">
+          google.charts.load("current", {packages:['corechart']});
+             google.charts.setOnLoadCallback(drawChart);
+             function drawChart() {
+              var data = google.visualization.arrayToDataTable([
+                ["Month", "Bookings"],
+                ["January", {{bookingsAMonth[0]}}],
+                ["February", {{bookingsAMonth[1]}}],
+                ["March", {{bookingsAMonth[2]}}],
+                ["April", {{bookingsAMonth[3]}}],
+                ["May", {{bookingsAMonth[4]}}],
+                ["June", {{bookingsAMonth[5]}}],
+                ["July", {{bookingsAMonth[6]}}],
+                ["August", {{bookingsAMonth[7]}}],
+                ["September", {{bookingsAMonth[8]}}],
+                ["October", {{bookingsAMonth[9]}}],
+                ["November", {{bookingsAMonth[10]}}],
+                ["December", {{bookingsAMonth[11]}}]
+                ]);
+
+              var view = new google.visualization.DataView(data);
+              view.setColumns([0, 1,
+                               { calc: "stringify",
+                                 sourceColumn: 1,
+                                 type: "string",
+                                 role: "annotation" },
+                              ]);
+
+              var options = {
+                title: "Bookings per month",
+                width: 1500,
+                height: 400,
+                bar: {groupWidth: "95%"},
+                legend: { position: "none" },
+                colors: ['#3366CC']
+              };
+              var chart = new google.visualization.ColumnChart(document.getElementById("chart_div"));
+              chart.draw(view, options);
+          }
+        </script>
+        <div id="chart_div"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+          <script type="text/javascript">
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+
+              var data = google.visualization.arrayToDataTable([
+                ['Number of Nights Booked', 'Number of Nights Unbooked'],
+                ['Booked', {{numBookedDays}}],
+                ['Unbooked', {{numUnbookedDays}}]
+              ]);
+
+              var options = {
+                title: 'Booked/Unbooked Days in 2018'
+              };
+
+              var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+              chart.draw(data, options);
+            }
+          </script>
+          <div id="piechart" style="width: 1500px; height: 500px;"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <script type="text/javascript">
+                  google.charts.load('current', {packages: ['corechart', 'line']});
+                  google.charts.setOnLoadCallback(drawBasic);
+
+                  function drawBasic() {
+
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'X');
+                        data.addColumn('number', 'Revenue');
+
+                        data.addRows([
+                          ["January", {{revenueAMonth[0]}}], ["February", {{revenueAMonth[1]}}], ["March", {{revenueAMonth[2]}}],
+                          ["April", {{revenueAMonth[3]}}], ["May", {{revenueAMonth[4]}}], ["June", {{revenueAMonth[5]}}],
+                          ["July", {{revenueAMonth[6]}}], ["August", {{revenueAMonth[7]}}], ["September", {{revenueAMonth[8]}}],
+                          ["October", {{revenueAMonth[9]}}], ["November", {{revenueAMonth[10]}}], ["December", {{revenueAMonth[11]}}]
+                        ]);
+
+                      var options = {
+                          hAxis: {
+                            title: 'Month'
+                          },
+                          vAxis: {
+                            title: 'Revenue (£)'
+                          }
+                        };
+
+                        var chart = new google.visualization.LineChart(document.getElementById('linechart_div'));
+
+                        chart.draw(data, options);
+                      }
+        </script>
+        <div id="linechart_div" style="height: 600px;"></div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+{% endblock content %}

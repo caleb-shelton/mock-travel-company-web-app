@@ -1,0 +1,134 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+.navbar {
+  font-size: 1.2em;
+  font-family: 'Questrial', sans-serif;
+}
+.navbar-brand {
+  min-height: 55px;
+  padding: 0 15px 5px;
+}
+
+/* Home/index page */
+
+#home {
+  background: url(/static/img/background.jpg) no-repeat center center fixed;
+  display: table;
+  height: 100%;
+  position: relative;
+  width: 100%;
+  background-size: cover;
+}
+.home-animate {
+  &:before {
+    content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
+	opacity: .6;
+  }
+}
+.landing-text {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+.landing-text h1 {
+  font-size: 5em;
+  font-weight:700;
+  font-family: 'Questrial', sans-serif;
+  color: white;
+  z-index: 2;
+}
+.curve{
+  padding-bottom: 10em;
+}
+#the-property{
+  padding: 3em;
+}
+.landing-text h3 {
+  color: white;
+  font-weight:100;
+  font-size: 3em;
+  font-family: 'Gloria Hallelujah', cursive;
+  z-index: 2;
+}
+.curve-overlay{
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  z-index: 1;
+}
+.colour-overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(35deg, #e020ff, #20d6ff);
+  background-size: 120% 120%;
+  opacity: 0.6;
+  position: absolute;
+}
+#maps-section{
+  width: 100%;
+  height: 20em;
+}
+
+/* General styles for whole website */
+
+h1{
+  font-size: 2.5em;
+  font-weight:700;
+  font-family: 'Questrial', sans-serif;
+  color: black;
+}
+h2{
+  font-size: 2.5em;
+  font-weight:700;
+  font-family: 'Questrial', sans-serif;
+  color: black;
+}
+h3{
+  font-size: 1em;
+  font-weight:300;
+  font-family: 'Roboto', sans-serif;
+  color: black;
+}
+h4{
+  font-size: 1em;
+  font-weight:300;
+  font-family: 'Roboto', sans-serif;
+  color: black;
+}
+h5{
+  font-size: 1.8em;
+  font-weight:200;
+  font-family: 'Questrial', sans-serif;
+  color: black;
+}
+.container-fluid {
+  padding: 2em;
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.06);
+}
+iframe {
+  border: 0px;
+}
+
+/* Rent page */
+.rentform{
+  padding: 6em;
+}
+#google-calendar iframe{
+  border: 0px;
+  width: 800px;
+  height: 600px;
+}
+
+/* Attraction page */
+.Attraction img {
+    width:600px;
+    height:300px;
+}

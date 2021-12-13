@@ -1,0 +1,47 @@
+/* This is for the initial home page animation of fading in home page
+and landing text. */
+
+.landing-text {
+  animation-fill-mode: both;
+  animation-name: opacityChange;
+  animation-delay: 1.5s;
+  animation-timing-function: ease-in;
+  animation-duration: 0.7s;
+}
+@keyframes opacityChange {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+@keyframes opacityChange2 {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.home-animate {
+  animation-name: opacityChange2;
+  animation-timing-function: ease-in;
+  animation-duration: 1.5s;
+}
+
+/* Colour gradient animation */
+
+.colour-overlay {
+  -webkit-animation: AnimationName 2s ease infinite;
+  -moz-animation: AnimationName 2s ease infinite;
+  animation: AnimationName 2s ease infinite;
+}
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 60%}
+    50%{background-position:100% 41%}
+    100%{background-position:0% 60%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 60%}
+    50%{background-position:100% 41%}
+    100%{background-position:0% 60%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 60%}
+    50%{background-position:100% 41%}
+    100%{background-position:0% 60%}
+}
